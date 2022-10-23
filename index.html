@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="'en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/a6f8583930.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="header">
+            <div class="container">
+                <nav>
+                    <img src="images/logo.png" class ="logo">
+                    <ul>
+                        <li><a href = '#header'>Home</a></li>
+                        <li><a href = '#about'>About Me</a></li>
+                        <li><a href = '#contact'>Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-text">
+                    <p>Computer Science Student</p>
+                    <h1>Hi! I'm<span> Drishti</span> <br> Sinha From India</h1>
+                </div>
+            </div>
+        </div>
+        <!-- -----------about------------- -->
+        
+        <div id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="about-col-1">
+                        <img src="images/d.png"
+                        width="455"
+                        height="400">
+                    </div>
+                    <div class="about-col-2">
+                        <h1 class="sub-title">About Me</h1>
+                        <p>Hello! I am Drishti Sinha. I am currently pursuing my B. Tech degree in Computer Science from the University of Petroleum and Energy Science. I like photography and designing.</p>
+
+                        <div class="tab-titles">
+                            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                            <p class="tab-links" onclick="opentab('education')">Education</p>
+                        </div>
+                        <div class="tab-contents active-tab" id="skills">
+                            <ul>                  
+                                <li><span>Programing languages</span><br>C, Python and Java</li>
+                                <li><span>Graphic Design</span><br>Photoshop and Canva </li>
+                            </ul>
+                        </div>
+                        <div class="tab-contents" id ="education">
+                            <ul>                  
+                                <li><span> 2021-2025</span><br>B.Tech in CSE from UPES</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ------contact------- -->
+
+        <div id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="contact-left">
+                        <h1 class="sub-title">Contact Me</h1>
+                        <p><i class="fa-solid fa-square-envelope"></i>itsdrishti5@gmail.com</p>
+                        <div class="social-icon">
+                            <a href="https://www.linkedin.com/in/drishti-sinha-b4b477226"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/_drishti_sinha?r=nametag"><i class="fa-brands fa-square-instagram"></i></a>
+                        </div> <a href=""class="btn btn2"></a>
+                    </div>
+                    <div class="contact-right">
+                        <form name="submit-to-google-sheet">
+                            <input type="text" name="Name" placeholder="Your Name" required>
+                            <input type="email" name="Email" placeholder="Your Email" required>
+                            <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+                        <span id ="msg"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            var tablinks = document.getElementsByClassName("tab-links");
+            var tabcontents = document.getElementsByClassName("tab-contents");
+            function opentab(tabname){
+                for(tablink of tablinks){
+                    tablink.classList.remove("active-link");
+                }
+                for(tabcontent of tabcontents){
+                    tabcontent.classList.remove("active-tab");
+                }
+                event.currentTarget.classList.add("active-link");
+                document.getElementById(tabname).classList.add("active-tab");
+            }
+
+        </script>
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbztnNPprrI6QLVog833TpVWjggRzx3fgzOliLDdAfGIqKaQaoWugEFVM0F7gyd36vvMhA/exec'
+            const form = document.forms['submit-to-google-sheet']
+            const msg = document.getElementById("msg")
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    msg.innerHTML="Message sent successfully!"
+                    setTimeout(function(){
+                        msg.innerHTML=""
+                    },5000)
+                    form.reset()
+                })
+                .catch(error => console.error('Error!', error.message))
+            })
+          </script>
+    </body>
+</html>
